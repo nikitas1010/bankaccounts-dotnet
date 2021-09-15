@@ -24,7 +24,7 @@ namespace myBank
                 MakeDeposit(initialBalance, DateTime.Now, "Initial Deposit");
             }
         }
-        private List<Transaction> allTransactions = new List<Transaction>();
+        protected List<Transaction> allTransactions = new List<Transaction>();
 
         public string Number { get; }
         public string Owner { get; set; }

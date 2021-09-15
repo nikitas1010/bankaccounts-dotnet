@@ -4,7 +4,7 @@ namespace myBank
     public class LineOfCreditAccount : BankAccount
     {
         //private decimal _interest = 0m;
-        public decimal interest = 0m;
+        public decimal interest = 0.07m;
         //private decimal _creditLimit = 0m;
 
         public LineOfCreditAccount(string name, decimal initialBalance, decimal creditLimit) : base(name, initialBalance, -creditLimit)
@@ -13,12 +13,19 @@ namespace myBank
         { }
 
 
+        //public override void PerformMonthEndTransactions()
+        //{
+        //    if (Balance != 0)   
+        //        MakeWithdrawal(Math.Abs(Balance) * interest, DateTime.Now, "interest charged");
+        //}
         public override void PerformMonthEndTransactions()
         {
-            if (Balance != 0) {
-                MakeWithdrawal(Balance * interest, DateTime.Now, "interest charged");
+            if (Balance < 0)
+            {
+                // Negate the balance to get a positive interest charge:
+                var interest = -Balance * 0.07m;
+                MakeWithdrawal(interest, DateTime.Now, "Charge monthly interest");
             }
-
         }
         //if balance + withdrawal > creditLimit{ charge fee}
 
